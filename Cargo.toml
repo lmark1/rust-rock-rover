@@ -1,0 +1,11 @@
+[package]
+name = "rust-rock-rover"
+version = "0.1.0"
+edition = "2021"
+description = "Concert web crawler in Rust"
+repository = "https://github.com/lmark1/rust-rock-rover"
+license = "MIT OR Apache-2.0"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
