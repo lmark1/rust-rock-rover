@@ -12,6 +12,10 @@
   [this](https://www.rust-lang.org/tools/install) guide.
 * run `cargo install rust-rock-rover`
 
+### YCM
+
+* Change RUST_TOOLCHAIN to ```nightly-2023-10-27```
+
 ## License
 
 Licensed under either of
