@@ -5,6 +5,19 @@ use crate::examples::memory;
 pub mod examples;
 
 fn main() {
-    println!("Hekkers"); 
+    println!("Hekkers");
+
+    // BIG#1 - There is no use after free
+    memory::dangling_pointer();
     memory::borrowing_view();
+    memory::dangling_pointer_in_container();
+    memory::pushback_in_function();
+
+    // BIG#2 - Mutable aliasing is unique
+    memory::mutable_aliasing();
+    memory::mutable_aliasing_container();
+    memory::mutable_aliasing_slicing();
+    memory::mutable_aliasing_iterator();
+    memory::mutable_aliasing_cell();
+    memory::mutable_aliasing_unsafe();
 }
