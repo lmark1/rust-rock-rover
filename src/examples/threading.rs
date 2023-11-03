@@ -3,6 +3,9 @@ extern crate rayon;
 use examples::threading::rayon::iter::IntoParallelRefMutIterator;
 use examples::threading::rayon::iter::ParallelIterator;
 
+use std::sync::atomic::AtomicI32;
+use std::sync::Mutex;
+use std::sync::MutexGuard;
 use std::sync::RwLock;
 
 /*
@@ -56,7 +59,7 @@ pub fn tragical_multithreading_aliasing() {
             sum += *x;
         }
 
-        println!("Sum no multithreading: {}", sum);
+        assert_eq!(sum, 15);
     }
 
     {
@@ -67,7 +70,7 @@ pub fn tragical_multithreading_aliasing() {
             sum += *x;
         });
 
-        println!("Sum serial, no multi: {}", sum);
+        assert_eq!(sum, 15);
     }
 
     {
@@ -75,18 +78,62 @@ pub fn tragical_multithreading_aliasing() {
         let mut v = vec![1, 2, 3, 4, 5];
 
         let mut sum_vulgaris = 0;
-        let mut sum: RwLock<i32> = RwLock::new(0);
-
+        let mut sum = RwLock::new(0);
         v.par_iter_mut().for_each(|x| {
-
-            // This does not work!
+            // This does not work! Mutable borrow in parallel Fn
             // sum_vulgaris += *x;
-
-            let mut temp_sum = sum.write().unwrap();
-            *temp_sum += *x;
-            dbg!(*temp_sum);
         });
-
-        println!("Sum serial, multi-thread safe with RwLock: {}", sum.read().unwrap());
     }
+}
+
+/*
+ * Thread synchronization using rwlock variables.
+ */
+pub fn sync_shared_state_rwlock() {
+    // Serial foreach, YES multithreading
+    let mut v = vec![1, 2, 3, 4, 5];
+
+    let mut sum_vulgaris = 0;
+    let mut sum = RwLock::new(0);
+    v.par_iter_mut().for_each(|x| {
+        // This does not work!
+        // sum_vulgaris += *x;
+
+        let mut rwlock_sum = sum.write().unwrap();
+        *rwlock_sum += *x;
+        // dbg!(*rwlock_sum);
+    });
+
+    assert_eq!(*sum.read().unwrap(), 15);
+}
+
+
+/*
+ * Thread synchronization using mutex variables.
+ */
+pub fn sync_shared_state_mutex() {
+    let mut v = vec![1, 2, 3, 4, 5];
+
+    let mut mut_sum = Mutex::new(0);
+    v.par_iter_mut().for_each(|x| {
+        let mut mutex_sum: MutexGuard<i32> = mut_sum.lock().unwrap();
+        *mutex_sum += *x;
+    });
+
+    assert_eq!(*mut_sum.lock().unwrap(), 15);
+}
+
+
+/*
+ * Thread synchronization using atomic variables.
+ */
+pub fn sync_shared_state_atomic() {
+    let mut v = vec![1, 2, 3, 4, 5];
+
+    let mut atomic_sum = AtomicI32::new(0);
+    v.par_iter_mut().for_each(|x| {
+        atomic_sum.fetch_add(*x, std::sync::atomic::Ordering::Relaxed);
+    });
+
+    assert_eq!(*atomic_sum.get_mut(), 15);
 }

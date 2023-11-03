@@ -26,4 +26,7 @@ fn main() {
     // BIG#2 - Aliasing while threading
     threading::magical_multithreading_aliasing();
     threading::tragical_multithreading_aliasing();
+    threading::sync_shared_state_rwlock();
+    threading::sync_shared_state_atomic();
+    threading::sync_shared_state_mutex();
 }
