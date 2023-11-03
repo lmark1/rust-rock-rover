@@ -89,12 +89,13 @@ pub fn tragical_multithreading_aliasing() {
 /*
  * Thread synchronization using rwlock variables.
  */
+#[allow(unused_variables)]
 pub fn sync_shared_state_rwlock() {
     // Serial foreach, YES multithreading
     let mut v = vec![1, 2, 3, 4, 5];
 
-    let mut sum_vulgaris = 0;
-    let mut sum = RwLock::new(0);
+    let sum_vulgaris = 0;
+    let sum = RwLock::new(0);
     v.par_iter_mut().for_each(|x| {
         // This does not work!
         // sum_vulgaris += *x;
@@ -107,14 +108,13 @@ pub fn sync_shared_state_rwlock() {
     assert_eq!(*sum.read().unwrap(), 15);
 }
 
-
 /*
  * Thread synchronization using mutex variables.
  */
 pub fn sync_shared_state_mutex() {
     let mut v = vec![1, 2, 3, 4, 5];
 
-    let mut mut_sum = Mutex::new(0);
+    let mut_sum = Mutex::new(0);
     v.par_iter_mut().for_each(|x| {
         let mut mutex_sum: MutexGuard<i32> = mut_sum.lock().unwrap();
         *mutex_sum += *x;
@@ -122,7 +122,6 @@ pub fn sync_shared_state_mutex() {
 
     assert_eq!(*mut_sum.lock().unwrap(), 15);
 }
-
 
 /*
  * Thread synchronization using atomic variables.

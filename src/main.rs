@@ -1,6 +1,7 @@
 // Get all public function from examples/memory.rs into scope here
 use crate::examples::memory;
 use crate::examples::threading;
+use crate::examples::move_semantics;
 
 // Use this to read examples/mod.rs file
 pub mod examples;
@@ -29,4 +30,12 @@ fn main() {
     threading::sync_shared_state_rwlock();
     threading::sync_shared_state_atomic();
     threading::sync_shared_state_mutex();
+
+    // BIG#3 - by-value on nonCopy moves the object
+   move_semantics::moving_a_string(); 
+   move_semantics::moved_string_view();
+   move_semantics::memswap_move();
+   move_semantics::option_move();
+   move_semantics::container_remove();
+   move_semantics::move_to_nowhere();
 }
