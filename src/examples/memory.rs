@@ -172,3 +172,19 @@ pub fn mutable_aliasing_unsafe() {
     }
     assert_eq!(char_array[0], 'b');
 }
+
+#[allow(dead_code)]
+fn push_int_twice(v: &mut Vec<i32>, n: &i32) {
+    v.push(*n);
+    v.push(*n);
+}
+
+#[allow(unused_variables)]
+#[allow(unused_mut)]
+pub fn reallocating_invalidates_reference() {
+    let mut my_vector = vec![0];
+    let my_int_reference = &my_vector[0];
+
+    // Can't call, double mutable borrow
+    // push_int_twice(&mut my_vector, my_int_reference);
+}
