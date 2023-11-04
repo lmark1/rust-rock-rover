@@ -7,7 +7,7 @@ on:
 
 jobs:
   publish:
-    name: Publishing for {{ "${{ matrix.job.os }}" }}
+    name: Publishing for "${{ matrix.job.os }}"
     runs-on: "${{ matrix.job.os }}"
     strategy:
       matrix:
@@ -83,6 +83,7 @@ jobs:
       - name: Packaging final binary
         shell: bash
         run: |
+          set -x
           cd target/${{ matrix.job.target }}/release
 
           ####### reduce binary size by removing debug symbols #######
@@ -92,6 +93,7 @@ jobs:
           else
             GCC_PREFIX=""
           fi
+          echo "GCC_PREFIX=${GCC_PREFIX}"
           ${GCC_PREFIX}strip $BINARY_NAME
 
           ########## create tar.gz ##########
