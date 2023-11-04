@@ -77,8 +77,6 @@ jobs:
           toolchain: "${{ matrix.rust }}"
           args: --release --target "${{ matrix.job.target }}"
       - name: Packaging final binary
-        permissions:
-          contents: write
         shell: bash
         run: |
           cd target/${{ matrix.job.target }}/release
