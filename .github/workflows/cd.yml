@@ -77,6 +77,8 @@ jobs:
           toolchain: "${{ matrix.rust }}"
           args: --release --target "${{ matrix.job.target }}"
       - name: Packaging final binary
+        permissions:
+          contents: write
         shell: bash
         run: |
           cd target/${{ matrix.job.target }}/release
@@ -88,7 +90,7 @@ jobs:
           else
             GCC_PREFIX=""
           fi
-          "$GCC_PREFIX"strip $BINARY_NAME
+          $GCC_PREFIXstrip $BINARY_NAME
 
           ########## create tar.gz ##########
           RELEASE_NAME=${{ github.event.repository.name }}-${{ github.ref_name }}-${{ matrix.job.os-name }}-${{ matrix.job.architecture }}
@@ -107,7 +109,7 @@ jobs:
             target/${{ matrix.job.target }}/release/${{ github.event.repository.name }}-*.tar.gz
             target/${{ matrix.job.target }}/release/${{ github.event.repository.name }}-*.sha256
         env:
-          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+          GITHUB_TOKEN: "${{ secrets.MY_TOKEN }}"
   publish-cargo:
     name: Publishing to Cargo
     runs-on: ubuntu-latest
