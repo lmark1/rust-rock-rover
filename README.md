@@ -1,7 +1,7 @@
 # rust-rock-rover
 
 [![Crates.io](https://img.shields.io/crates/v/rust-rock-rover.svg)](https://crates.io/crates/rust-rock-rover)
-[![Docs.rs](https://docs.rs/rust-rock-rover/badge.svg)](https://docs.rs/rust-rock-rover)
+[![Docs.rs](https://img.shields.io/badge/rust--rock--rover-docs-green)](https://docs.rs/rust-rock-rover)
 [![CI](https://github.com/lmark1/rust-rock-rover/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/lmark1/rust-rock-rover/actions/workflows/ci.yml)
 
 Repository structure created as:
