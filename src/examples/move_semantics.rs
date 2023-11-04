@@ -5,6 +5,7 @@ use std::fs::File;
  * Moving a non-POD destroys the object.
  * This is the default behaviour on assignment.
  */
+#[allow(clippy::vec_init_then_push)]
 pub fn moving_a_string() {
     let s1 = "abcdef".to_string();
     let s2 = s1; // a move happens here, s1 is gone
@@ -21,6 +22,7 @@ pub fn moving_a_string() {
     assert_eq!(v[0], "abcdef".to_string());
 }
 
+#[allow(clippy::vec_init_then_push)]
 pub fn copying_a_string() {
     let s1 = "abcdef".to_string();
     let s2 = s1.clone(); // now it copies
@@ -55,6 +57,7 @@ pub fn moved_string_view() {
  * Move string located in a container. Should work in c++ - although not advised.
  */
 #[allow(unused_variables)]
+#[allow(clippy::vec_init_then_push)]
 pub fn moved_string_from_container() {
     let s1 = "abcde".to_string();
     let s2 = s1;
@@ -78,6 +81,7 @@ pub fn moved_string_from_container() {
 }
 
 #[allow(unused_variables)]
+#[allow(clippy::ptr_arg)]
 fn move_ref(s1: &mut String) {
     // Cannot do this because we invalidate the mutable reference
     // We don't know where does s1 come from, where does it live?

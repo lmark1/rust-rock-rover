@@ -16,7 +16,7 @@ use std::thread;
 pub fn magical_multithreading_aliasing() {
     {
         // No multithreading
-        let mut v = vec![1, 2, 3, 4, 5];
+        let mut v = [1, 2, 3, 4, 5];
         for x in &mut v {
             *x += 1;
         }
@@ -27,7 +27,7 @@ pub fn magical_multithreading_aliasing() {
 
     {
         // Serial foreach, no multitreading
-        let mut v = vec![1, 2, 3, 4, 5];
+        let mut v = [1, 2, 3, 4, 5];
         v.iter_mut().for_each(|x| {
             *x += 1;
         });
@@ -37,7 +37,7 @@ pub fn magical_multithreading_aliasing() {
 
     {
         // Serial foreach, YES multithreading
-        let mut v = vec![1, 2, 3, 4, 5];
+        let mut v = [1, 2, 3, 4, 5];
         v.iter_mut().for_each(|x| {
             *x += 1;
         });
@@ -55,7 +55,7 @@ pub fn magical_multithreading_aliasing() {
 pub fn tragical_multithreading_aliasing() {
     {
         // No multithreading
-        let mut v = vec![1, 2, 3, 4, 5];
+        let mut v = [1, 2, 3, 4, 5];
         let mut sum = 0;
         for x in &mut v {
             sum += *x;
@@ -66,7 +66,7 @@ pub fn tragical_multithreading_aliasing() {
 
     {
         // Serial foreach, no multitreading
-        let mut v = vec![1, 2, 3, 4, 5];
+        let mut v = [1, 2, 3, 4, 5];
         let mut sum = 0;
         v.iter_mut().for_each(|x| {
             sum += *x;
@@ -77,7 +77,7 @@ pub fn tragical_multithreading_aliasing() {
 
     {
         // Serial foreach, YES multithreading
-        let mut v = vec![1, 2, 3, 4, 5];
+        let mut v = [1, 2, 3, 4, 5];
 
         let mut sum_vulgaris = 0;
         let mut sum = RwLock::new(0);
@@ -94,7 +94,7 @@ pub fn tragical_multithreading_aliasing() {
 #[allow(unused_variables)]
 pub fn sync_shared_state_rwlock() {
     // Serial foreach, YES multithreading
-    let mut v = vec![1, 2, 3, 4, 5];
+    let mut v = [1, 2, 3, 4, 5];
 
     let sum_vulgaris = 0;
     let sum = RwLock::new(0);
@@ -114,7 +114,7 @@ pub fn sync_shared_state_rwlock() {
  * Thread synchronization using mutex variables.
  */
 pub fn sync_shared_state_mutex() {
-    let mut v = vec![1, 2, 3, 4, 5];
+    let mut v = [1, 2, 3, 4, 5];
 
     let mut_sum = Mutex::new(0);
     v.par_iter_mut().for_each(|x| {
@@ -129,7 +129,7 @@ pub fn sync_shared_state_mutex() {
  * Thread synchronization using atomic variables.
  */
 pub fn sync_shared_state_atomic() {
-    let mut v = vec![1, 2, 3, 4, 5];
+    let mut v = [1, 2, 3, 4, 5];
 
     let mut atomic_sum = AtomicI32::new(0);
     v.par_iter_mut().for_each(|x| {

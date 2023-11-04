@@ -49,6 +49,7 @@ pub fn dangling_pointer_in_container() {
  * invalid push back function
  */
 #[allow(dead_code)]
+#[allow(clippy::ptr_arg)]
 fn invalid_push_back(_v: &mut Vec<&str>, _s: &str) {
     // Invalid push operation! s must outlive v
     // v.push(s);
@@ -182,7 +183,7 @@ fn push_int_twice(v: &mut Vec<i32>, n: &i32) {
 #[allow(unused_variables)]
 #[allow(unused_mut)]
 pub fn reallocating_invalidates_reference() {
-    let mut my_vector = vec![0];
+    let mut my_vector = [0];
     let my_int_reference = &my_vector[0];
 
     // Can't call, double mutable borrow
