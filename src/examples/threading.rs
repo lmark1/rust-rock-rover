@@ -150,10 +150,10 @@ pub fn freestyle_mutltithreading() {
     let mut thread_handles = Vec::new();
 
     for _ in 1..10 {
-        // Need to first make a local clone of the shared_ptr in order to move it to 
-        // the thread. Moving arc_mutex_string to a thread would work for only 
-        // one thread. 
-        // The ownership of the arc_clone is transferred to the thread which 
+        // Need to first make a local clone of the shared_ptr in order to move it to
+        // the thread. Moving arc_mutex_string to a thread would work for only
+        // one thread.
+        // The ownership of the arc_clone is transferred to the thread which
         // mentions its name.
         let arc_clone = arc_mutex_string.clone();
 

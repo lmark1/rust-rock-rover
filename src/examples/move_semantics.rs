@@ -1,5 +1,5 @@
+use std::fs::File;
 use std::mem;
-use std::fs::File; 
 
 /*
  * Moving a non-POD destroys the object.
@@ -156,4 +156,3 @@ pub fn move_to_nowhere() {
     let file = File::open("/dev/null");
     drop(file);
 }
-
