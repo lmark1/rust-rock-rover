@@ -2,7 +2,7 @@
 
 [![Crates.io](https://img.shields.io/crates/v/rust-rock-rover.svg)](https://crates.io/crates/rust-rock-rover)
 [![Docs.rs](https://docs.rs/rust-rock-rover/badge.svg)](https://docs.rs/rust-rock-rover)
-[![CI](https://github.com/lmark1/rust-rock-rover/workflows/CI/badge.svg)](https://github.com/lmark1/rust-rock-rover/actions)
+[![CI](https://github.com/lmark1/rust-rock-rover/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/lmark1/rust-rock-rover/actions/workflows/ci.yml)
 
 ## Installation
 
