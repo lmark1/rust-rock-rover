@@ -61,6 +61,14 @@ jobs:
           profile: minimal
           override: true
       - uses: Swatinem/rust-cache@v2
+      - name: install strip command
+        shell: bash
+        run: |
+          if [[ "${{ matrix.job.target }}" == aarch64-unknown-linux-gnu ]]; then
+              sudo apt update
+              sudo apt upgrade
+              sudo apt-get install -y binutils-aarch64-linux-gnu
+          fi
       - name: Cargo build
         uses: actions-rs/cargo@v1
         with:
@@ -68,14 +76,6 @@ jobs:
           use-cross: "${{ matrix.job.use-cross }}"
           toolchain: "${{ matrix.rust }}"
           args: --release --target "${{ matrix.job.target }}"
-
-      - name: install strip command
-        shell: bash
-        run: |
-          if [[ "${{ matrix.job.target }}" == aarch64-unknown-linux-gnu ]]; then
-              sudo apt update
-              sudo apt-get install -y binutils-aarch64-linux-gnu
-          fi
       - name: Packaging final binary
         shell: bash
         run: |
@@ -104,8 +104,8 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           files: |
-            target/{{ "${{ matrix.job.target }}" }}/release/${{ github.event.repository.name }}-*.tar.gz
-            target/{{ "${{ matrix.job.target }}" }}/release/${{ github.event.repository.name }}-*.sha256
+            target/${{ matrix.job.target }}/release/${{ github.event.repository.name }}-*.tar.gz
+            target/${{ matrix.job.target }}/release/${{ github.event.repository.name }}-*.sha256
         env:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
   publish-cargo:
