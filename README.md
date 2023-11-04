@@ -4,6 +4,12 @@
 [![Docs.rs](https://docs.rs/rust-rock-rover/badge.svg)](https://docs.rs/rust-rock-rover)
 [![CI](https://github.com/lmark1/rust-rock-rover/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/lmark1/rust-rock-rover/actions/workflows/ci.yml)
 
+Repository structure created as:
+```bash
+cargo generate --git https://github.com/rust-github/template.git
+```
+using [cargo-generate](https://github.com/cargo-generate/cargo-generate).
+
 ## Installation
 
 ### Cargo
