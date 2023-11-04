@@ -1,13 +1,21 @@
-cargo-features = ["edition2021"]
-
 [package]
 name = "rust-rock-rover"
 version = "0.1.0"
+edition = "2021"
 description = "Concert web crawler in Rust"
 repository = "https://github.com/lmark1/rust-rock-rover"
 license = "MIT OR Apache-2.0"
+autobins = false
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[[bin]]
+name = "rust-rock-rover"
+path = "src/main.rs"
+
+[[bin]]
+name = "run_examples"
+path = "src/bin/run_examples.rs"
 
 [dependencies]
 spider = "1.5.0"

@@ -1,7 +1,7 @@
 extern crate rayon;
 
-use examples::threading::rayon::iter::IntoParallelRefMutIterator;
-use examples::threading::rayon::iter::ParallelIterator;
+use rayon::iter::IntoParallelRefMutIterator;
+use rayon::iter::ParallelIterator;
 
 use std::sync::atomic::AtomicI32;
 use std::sync::Arc;
