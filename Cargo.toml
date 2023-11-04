@@ -20,3 +20,4 @@ path = "src/bin/run_examples.rs"
 [dependencies]
 spider = "1.5.0"
 rayon = "1.7"
+openssl = { version = "0.10", features = ["vendored"] }
