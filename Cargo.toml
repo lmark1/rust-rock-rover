@@ -21,4 +21,4 @@ path = "src/bin/run_examples.rs"
 spider = { version = "1.46.5", features = ["budget"] }
 rayon = "1.7"
 openssl = { version = "0.10", features = ["vendored"] }
-http = { version = "0.2.9" } 
+http = { version = "1.0.0" } 
