@@ -1299,9 +1299,9 @@ dependencies = [
 
 [[package]]
 name = "spider"
-version = "1.46.5"
+version = "1.48.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "97911284f973a184842d1cee79208d1e4ee8d34b6bb513c1372a912b9f53b501"
+checksum = "44f99fbc0c5a1561c087520d67936ac5759be2566672d64b37964fc9e60808f2"
 dependencies = [
  "ahash",
  "bytes",
